@@ -1,0 +1,458 @@
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/source-serif-4";
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────── */
+
+:root {
+  --bg: #111111;
+  --surface: #1c1c1c;
+  --border: #2a2a2a;
+  --text: #d4d4d4;
+  --muted: #666666;
+  --accent: #f97316;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
+  --font-serif: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.1s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+/* ── Layout ────────────────────────────────────────────────── */
+
+.site-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+main {
+  flex: 1;
+  padding: 48px 0 72px;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+
+.site-header {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.site-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+.site-name:hover {
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.nav-link {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.nav-link:hover,
+.nav-link--active {
+  color: var(--text);
+}
+
+/* ── Footer ────────────────────────────────────────────────── */
+
+.site-footer {
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.775rem;
+  color: var(--muted);
+}
+
+.footer-links a {
+  color: var(--muted);
+}
+
+.footer-links a:hover {
+  color: var(--text);
+}
+
+/* ── Home ──────────────────────────────────────────────────── */
+
+.intro {
+  margin-bottom: 52px;
+}
+
+.intro p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0 0 6px;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+.view-all {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 0.775rem;
+  color: var(--muted);
+}
+
+.view-all:hover {
+  color: var(--accent);
+}
+
+/* ── Article list ──────────────────────────────────────────── */
+
+.article-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.article-list-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-list-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.article-list-link {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.article-list-arrow {
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color 0.1s ease;
+}
+
+.article-list-item:hover .article-list-arrow {
+  color: var(--accent);
+}
+
+.article-list-title {
+  color: var(--text);
+}
+
+.article-list-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 5px;
+  padding-left: 20px;
+}
+
+.article-list-date {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.article-list-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.article-list-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 5px 0 0;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+/* ── Tags ──────────────────────────────────────────────────── */
+
+.tag {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* ── Article page ──────────────────────────────────────────── */
+
+.article {
+  max-width: 68ch;
+}
+
+.article-header {
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-header h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 14px;
+  color: var(--text);
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.article-meta .tags {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+}
+
+/* ── Prose (article body) ──────────────────────────────────── */
+
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.0125rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.prose p {
+  margin: 0 0 1.4em;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-mono);
+  line-height: 1.3;
+  color: var(--text);
+  margin: 2em 0 0.6em;
+}
+
+.prose h1 { font-size: 1.4rem; margin-top: 0; }
+.prose h2 { font-size: 1.1rem; }
+.prose h3 { font-size: 0.95rem; }
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.prose a:hover {
+  color: var(--text);
+  text-decoration-color: var(--text);
+}
+
+.prose strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  background: var(--surface);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+.prose pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px 20px;
+  overflow-x: auto;
+  margin: 1.6em 0;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.4em;
+}
+
+.prose li {
+  margin-bottom: 0.4em;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.1em;
+  margin: 1.5em 0;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5em 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  margin-bottom: 1.4em;
+}
+
+.prose th {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.prose td {
+  padding: 8px 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  vertical-align: top;
+}
+
+/* ── Page prose (non-article pages) ───────────────────────── */
+
+.page-prose h1 {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 24px;
+  color: var(--text);
+}
+
+.page-prose h2 {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 2em 0 0.4em;
+  color: var(--text);
+}
+
+/* ── Articles index ────────────────────────────────────────── */
+
+.page-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.page-subtitle {
+  font-size: 0.825rem;
+  color: var(--muted);
+  margin: 0 0 32px;
+}
+
+/* ── Work page ─────────────────────────────────────────────── */
+
+.work-period {
+  font-size: 0.75rem !important;
+  font-family: var(--font-mono) !important;
+  color: var(--muted) !important;
+  margin: -0.2em 0 0.6em !important;
+}
+
+/* ── Speaking ──────────────────────────────────────────────── */
+
+.speaking-empty {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+
+@media (max-width: 560px) {
+  html {
+    font-size: 14px;
+  }
+
+  .site-wrapper {
+    padding: 0 16px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+}

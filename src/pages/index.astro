@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const recentArticles = allArticles
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title="Gui Brasil">
+  <section class="intro">
+    <p>iOS engineer at <a href="https://comparethemarket.com" target="_blank" rel="noopener">Compare the Market</a>.</p>
+    <p>Building AI-assisted development workflows. Product-minded, with a background in journalism.</p>
+  </section>
+
+  {recentArticles.length > 0 && (
+    <section>
+      <p class="section-label">recent articles</p>
+      <ul class="article-list">
+        {recentArticles.map(article => (
+          <li class="article-list-item">
+            <a href={`/articles/${article.id}`} class="article-list-link">
+              <span class="article-list-arrow">→</span>
+              <span class="article-list-title">{article.data.title}</span>
+            </a>
+            <div class="article-list-meta">
+              <time class="article-list-date" datetime={article.data.date.toISOString()}>
+                {article.data.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
+              </time>
+              {article.data.tags.length > 0 && (
+                <span class="article-list-tags">
+                  {article.data.tags.map(tag => <span class="tag">#{tag}</span>)}
+                </span>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <a href="/articles" class="view-all">all articles →</a>
+    </section>
+  )}
+</BaseLayout>

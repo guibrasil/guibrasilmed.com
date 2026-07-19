@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const articles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title="Articles"
+  description="Swift, iOS architecture, and AI-assisted development — by Gui Brasil."
+>
+  <div>
+    <h1 class="page-title">Articles</h1>
+    <p class="page-subtitle">Swift, iOS architecture, and AI-assisted development.</p>
+
+    <ul class="article-list">
+      {articles.map(article => (
+        <li class="article-list-item">
+          <a href={`/articles/${article.id}`} class="article-list-link">
+            <span class="article-list-arrow">→</span>
+            <span class="article-list-title">{article.data.title}</span>
+          </a>
+          <div class="article-list-meta">
+            <time class="article-list-date" datetime={article.data.date.toISOString()}>
+              {article.data.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
+            </time>
+            {article.data.tags.length > 0 && (
+              <span class="article-list-tags">
+                {article.data.tags.map(tag => <span class="tag">#{tag}</span>)}
+              </span>
+            )}
+          </div>
+          {article.data.description && (
+            <p class="article-list-desc">{article.data.description}</p>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
