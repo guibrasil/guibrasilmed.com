@@ -53,7 +53,7 @@ a:hover {
 /* ── Layout ────────────────────────────────────────────────── */
 
 .site-wrapper {
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
