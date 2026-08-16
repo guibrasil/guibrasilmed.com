@@ -20,6 +20,7 @@ const recentArticles = allArticles
       <a href="https://github.com/guibrasil" target="_blank" rel="noopener">GitHub</a>
     </p>
     <p class="intro-desc">Building iOS banking products for financial institutions worldwide. Focused on clean architecture, test coverage, and shipping things that work.</p>
+    <p class="intro-subtitle">Senior iOS Engineer with 8+ years building scalable, high-performance mobile applications across fintech, healthcare, and global sports platforms reaching millions of users. Deep expertise in SwiftUI, Combine, async/await, and different architectures, with a track record of leading UIKit-to-SwiftUI migrations, driving architecture decisions, and increasingly integrating AI-assisted development workflows, custom agents and automation tooling, to accelerate delivery. Thrives in teams of all sizes, from small, high-impact squads to large cross-functional organisations, partnering closely with Product, Design, and Backend to ship reliable, user-focused features.</p>
   </section>
 
   {recentArticles.length > 0 && (
@@ -95,5 +96,13 @@ const recentArticles = allArticles
     line-height: 1.65;
     margin: 0;
     color: var(--text);
+  }
+
+  .intro-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-top: 1rem;
+    color: var(--text-muted, var(--text));
+    opacity: 0.75;
   }
 </style>
