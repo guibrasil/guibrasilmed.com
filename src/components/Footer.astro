@@ -1,15 +1,30 @@
 ---
-const year = new Date().getFullYear();
+import type { HTMLAttributes } from "astro/types";
+import Socials from "./Socials.astro";
+import { useTranslations } from "@/i18n";
+
+type Props = {
+  noMarginTop?: boolean;
+} & HTMLAttributes<"footer">;
+
+const { noMarginTop = false, class: className, ...attrs } = Astro.props;
+
+const t = useTranslations(Astro.currentLocale);
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="https://github.com/guibrasil" target="_blank" rel="noopener noreferrer">github</a>
-    <span aria-hidden="true">·</span>
-    <a href="https://linkedin.com/in/guibrasilmed" target="_blank" rel="noopener noreferrer">linkedin</a>
-    <span aria-hidden="true">·</span>
-    <a href="mailto:guibrasilmed@gmail.com">email</a>
-    <span aria-hidden="true">·</span>
-    <span>© {year}</span>
+<footer
+  class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
+  {...attrs}
+>
+  <div
+    class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4"
+  >
+    <Socials />
+    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
+      <span>{t.footer.copyright} &#169; {currentYear}</span>
+      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
+      <span>{t.footer.allRightsReserved}</span>
+    </div>
   </div>
 </footer>
