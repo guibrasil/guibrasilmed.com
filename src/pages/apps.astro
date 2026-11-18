@@ -1,37 +1,62 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
 ---
 
-<BaseLayout
-  title="Apps"
-  description="iOS apps built by Gui Medeiros."
->
-  <div class="prose page-prose">
-    <h1>Apps</h1>
+<Layout title={`Apps | ${config.site.title}`} description="iOS apps built by Gui Medeiros.">
+  <Header />
+  <Breadcrumb />
 
-    <h2>Kinepulse</h2>
-    <p class="work-period">iOS · SwiftUI · HealthKit · Supabase</p>
+  <main id="main-content" class="app-layout pb-12">
+    <h1 class="text-2xl font-semibold sm:text-3xl mt-8 mb-6">Apps</h1>
 
-    <div class="app-layout">
-      <div class="app-description">
-        <p>Kinepulse is a personal fitness companion built for iOS and Apple Watch. It tracks your daily step count, distance, and calories burned using HealthKit, and visualises your progress against a configurable daily goal.</p>
-        <p>The dashboard shows a weekly ring view at a glance, a live step counter with percentage progress, streak tracking to keep momentum going, and a recent activity log. The app supports biometric authentication, push notifications to nudge you towards your goal, and syncs your profile through Supabase.</p>
-        <p>Built with SwiftUI and a modular SPM architecture, Kinepulse separates concerns across KinepulseKit (core services), DesignSystem, AuthKit, and OnboardingKit — with a dedicated WatchApp target for wrist-based access.</p>
+    <section class="app-section">
+      <h2 class="app-name">Kinepulse</h2>
+      <p class="app-stack">iOS · SwiftUI · HealthKit · Supabase</p>
+
+      <div class="app-layout-inner">
+        <div class="app-description">
+          <p>Kinepulse is a personal fitness companion built for iOS and Apple Watch. It tracks your daily step count, distance, and calories burned using HealthKit, and visualises your progress against a configurable daily goal.</p>
+          <p>The dashboard shows a weekly ring view at a glance, a live step counter with percentage progress, streak tracking to keep momentum going, and a recent activity log. The app supports biometric authentication, push notifications to nudge you towards your goal, and syncs your profile through Supabase.</p>
+          <p>Built with SwiftUI and a modular SPM architecture, Kinepulse separates concerns across KinepulseKit (core services), DesignSystem, AuthKit, and OnboardingKit — with a dedicated WatchApp target for wrist-based access.</p>
+        </div>
+        <div class="app-screenshots">
+          <img src="/apps/kinepulse-splash.jpeg" alt="Kinepulse splash screen" class="app-screenshot" />
+          <img src="/apps/kinepulse-dashboard.jpeg" alt="Kinepulse dashboard" class="app-screenshot" />
+        </div>
       </div>
-      <div class="app-screenshots">
-        <img src="/apps/kinepulse-splash.jpeg" alt="Kinepulse splash screen" class="app-screenshot" />
-        <img src="/apps/kinepulse-dashboard.jpeg" alt="Kinepulse dashboard" class="app-screenshot" />
-      </div>
-    </div>
-  </div>
-</BaseLayout>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
 
 <style>
-  .app-layout {
+  .app-section {
+    margin-bottom: 3rem;
+  }
+
+  .app-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0 0 4px;
+  }
+
+  .app-stack {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 0 0 1.25rem;
+  }
+
+  .app-layout-inner {
     display: flex;
     gap: 2.5rem;
     align-items: flex-start;
-    margin-top: 1.25rem;
   }
 
   .app-description {
@@ -41,6 +66,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .app-description p {
     margin-bottom: 1rem;
+    line-height: 1.7;
   }
 
   .app-screenshots {
@@ -57,7 +83,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   @media (max-width: 640px) {
-    .app-layout {
+    .app-layout-inner {
       flex-direction: column-reverse;
     }
 
