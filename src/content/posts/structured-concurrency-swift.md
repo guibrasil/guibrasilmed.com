@@ -3,6 +3,7 @@ title: "Structured concurrency in Swift: what actually changes"
 description: "async/await is easy to adopt. Structured concurrency — task trees, cancellation, task groups — is where the real shift happens."
 pubDatetime: 2026-07-22
 tags: [swift, concurrency, ios]
+ogImage: /images/swift-concurrency-cover.png
 draft: false
 ---
 

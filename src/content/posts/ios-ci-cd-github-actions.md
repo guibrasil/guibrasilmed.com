@@ -3,6 +3,7 @@ title: "CI/CD for iOS with GitHub Actions and reusable workflows"
 description: "How to build a reliable iOS pipeline on GitHub Actions and extract it into reusable workflows and composite actions you can share across every project."
 pubDatetime: 2026-07-26
 tags: [ios, ci-cd, github-actions, swift]
+ogImage: /images/ios-cicd-cover.png
 draft: false
 ---
 
