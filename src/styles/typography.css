@@ -18,6 +18,12 @@
     }
 
     p,
+    li,
+    blockquote {
+      font-family: var(--font-source-serif), Georgia, serif;
+    }
+
+    p,
     strong,
     ol,
     ul,

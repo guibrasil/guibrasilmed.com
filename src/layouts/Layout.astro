@@ -42,11 +42,12 @@ const rssHref = getAssetPath("rss.xml");
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Font -->
+    <!-- Fonts -->
     <Font
-      cssVariable="--font-google-sans-code"
+      cssVariable="--font-jetbrains-mono"
       preload={[{ subset: "latin", weight: 400, style: "normal" }]}
     />
+    <Font cssVariable="--font-source-serif" />
 
     <!-- Primary meta -->
     <title>{title}</title>
