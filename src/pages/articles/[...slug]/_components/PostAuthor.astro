@@ -1,0 +1,52 @@
+---
+import config from "@/config";
+
+const { socials } = config;
+
+const github = socials.find(s => s.name === "github");
+const linkedin = socials.find(s => s.name === "linkedin");
+---
+
+<div class="border-border mt-8 flex gap-4 rounded-lg border p-5">
+  <img
+    src="/images/avatar.png"
+    alt={config.site.author}
+    class="size-14 flex-shrink-0 rounded-full object-cover"
+    onerror="this.style.display='none'"
+  />
+  <div>
+    <p class="font-app text-foreground font-semibold">
+      Written by {config.site.author}
+    </p>
+    <p class="text-muted-foreground mt-1 text-sm">
+      iOS engineer based in London. I write about Swift, mobile architecture,
+      and whatever side project I'm currently breaking.
+    </p>
+    <div class="font-app mt-2 flex gap-3 text-sm">
+      {
+        github && (
+          <a
+            href={github.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-accent hover:underline"
+          >
+            GitHub
+          </a>
+        )
+      }
+      {
+        linkedin && (
+          <a
+            href={linkedin.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-accent hover:underline"
+          >
+            LinkedIn
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>
