@@ -27,7 +27,7 @@ export default defineAstroPaperConfig({
   socials: [
     { name: "github", url: "https://github.com/guibrasil" },
     { name: "linkedin", url: "https://linkedin.com/in/guibrasilmed" },
-    { name: "mail", url: "mailto:guibrasilmed@gmail.com" },
+    { name: "mail", url: "mailto:guibrasildev@gmail.com" },
   ],
   shareLinks: [
     {
