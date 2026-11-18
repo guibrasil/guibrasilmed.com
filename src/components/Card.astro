@@ -16,7 +16,10 @@ const href = getPostUrl(id, filePath, Astro.currentLocale);
 const rawCoverSrc =
   typeof ogImage === "string" ? ogImage : (ogImage as { src: string } | undefined)?.src;
 const coverSrc =
-  rawCoverSrc ?? (config.features.dynamicOgImage ? `${href}/index.png` : undefined);
+  rawCoverSrc ??
+  (config.features.dynamicOgImage
+    ? `${href.replace(/\/$/, "")}/index.png`
+    : undefined);
 const firstTag = tags[0];
 ---
 
