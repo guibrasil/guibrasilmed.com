@@ -9,23 +9,58 @@ type Props = {
 } & CollectionEntry<"posts">;
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+const { title, description, ogImage, tags, ...props } = data;
 
-const { title, description, ...props } = data;
+const coverSrc =
+  typeof ogImage === "string" ? ogImage : (ogImage as { src: string } | undefined)?.src;
+const firstTag = tags[0];
+const href = getPostUrl(id, filePath, Astro.currentLocale);
 ---
 
-<li class="my-6">
-  <a
-    href={getPostUrl(id, filePath, Astro.currentLocale)}
-    class:list={[
-      "text-accent inline-block text-lg font-medium",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
-  >
-    <Heading transition:name={toTransitionName(id)}>
-      {title}
-    </Heading>
-  </a>
-  <Datetime {...props} />
-  <p>{description}</p>
-</li>
+{
+  coverSrc ? (
+    <li class="border-border my-3 overflow-hidden rounded-lg border">
+      <a href={href} class="relative block aspect-video overflow-hidden">
+        <img
+          src={coverSrc}
+          alt={title}
+          class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+        />
+        {firstTag && (
+          <span class="bg-accent text-accent-foreground font-app absolute top-2 left-2 rounded px-2 py-0.5 text-xs font-medium">
+            {firstTag}
+          </span>
+        )}
+      </a>
+      <div class="p-4">
+        <a
+          href={href}
+          class:list={[
+            "text-accent inline-block text-lg font-medium",
+            "decoration-dashed underline-offset-4 hover:underline",
+            "focus-visible:no-underline focus-visible:underline-offset-0",
+          ]}
+        >
+          <Heading transition:name={toTransitionName(id)}>{title}</Heading>
+        </a>
+        <Datetime {...props} />
+        <p class="mt-1 text-sm">{description}</p>
+      </div>
+    </li>
+  ) : (
+    <li class="my-6">
+      <a
+        href={href}
+        class:list={[
+          "text-accent inline-block text-lg font-medium",
+          "decoration-dashed underline-offset-4 hover:underline",
+          "focus-visible:no-underline focus-visible:underline-offset-0",
+        ]}
+      >
+        <Heading transition:name={toTransitionName(id)}>{title}</Heading>
+      </a>
+      <Datetime {...props} />
+      <p>{description}</p>
+    </li>
+  )
+}

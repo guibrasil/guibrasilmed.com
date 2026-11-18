@@ -79,6 +79,11 @@ const {
 const { Content, headings } = await render(post);
 const tocHeadings = config.features.toc && !hideToc ? headings : [];
 
+const coverImage =
+  typeof initOgImage === "string"
+    ? initOgImage
+    : (initOgImage as { src: string } | undefined)?.src;
+
 let ogImageUrl: string | undefined;
 
 if (typeof initOgImage === "string") {
@@ -137,6 +142,18 @@ const ogImage = ogImageUrl
       </span>
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
+
+    {
+      coverImage && (
+        <figure class="mt-6 mb-2">
+          <img
+            src={coverImage}
+            alt={title}
+            class="border-border w-full rounded-lg border"
+          />
+        </figure>
+      )
+    }
 
     <div class="post-body mt-8">
       <PostToc headings={tocHeadings} />

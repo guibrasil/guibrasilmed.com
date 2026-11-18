@@ -10,6 +10,7 @@ import Socials from "@/components/Socials.astro";
 import Card from "@/components/Card.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getUniqueTags } from "@/utils/getUniqueTags";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
@@ -22,6 +23,7 @@ const posts = await getCollection("posts");
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const allTags = getUniqueTags(posts);
 const homePath = getRelativeLocaleUrl(locale, "");
 ---
 
@@ -83,6 +85,27 @@ const homePath = getRelativeLocaleUrl(locale, "");
         )
       }
     </section>
+
+    {
+      allTags.length > 0 && (
+        <div class="border-border flex flex-wrap gap-2 border-b py-5">
+          <a
+            href={getRelativeLocaleUrl(locale, "articles")}
+            class="border-border hover:border-accent hover:text-accent font-app rounded-full border px-3 py-1 text-sm transition-colors"
+          >
+            All
+          </a>
+          {allTags.map(({ tag, tagName }) => (
+            <a
+              href={getRelativeLocaleUrl(locale, `tags/${tag}`)}
+              class="border-border hover:border-accent hover:text-accent font-app rounded-full border px-3 py-1 text-sm transition-colors"
+            >
+              {tagName}
+            </a>
+          ))}
+        </div>
+      )
+    }
 
     {
       featuredPosts.length > 0 && (
