@@ -1,0 +1,462 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+---
+
+<Layout
+  title={`Recruiters | ${config.site.title}`}
+  description="Full profile for recruiters: skills, experience, and tooling for Guilherme Medeiros, Senior iOS Engineer based in London."
+>
+  <Header />
+  <Breadcrumb />
+
+  <main id="main-content" class="app-layout pb-12">
+    <div class="hire">
+
+      <!-- ── Intro ── -->
+      <div class="hire-header">
+        <h1>Guilherme Medeiros</h1>
+        <p class="hire-role">Senior iOS Engineer · London, UK</p>
+        <p class="hire-contact">
+          <a href="mailto:guibrasilmed@gmail.com">guibrasilmed@gmail.com</a>
+          <span class="sep">·</span>
+          <a href="https://linkedin.com/in/guibrasilmed" target="_blank" rel="noopener">linkedin.com/in/guibrasilmed</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/guibrasil" target="_blank" rel="noopener">github.com/guibrasil</a>
+          <span class="sep">·</span>
+          <!-- TODO: add /downloads/gui-medeiros-cv.pdf and restore link -->
+        </p>
+      </div>
+
+      <!-- ── Summary ── -->
+      <section class="hire-section">
+        <p class="hire-summary">
+          Senior Mobile Developer with <strong>8+ years</strong> shipping production iOS applications
+          across fintech, healthcare, and sports at global scale. Deep expertise in Swift, SwiftUI,
+          and UIKit with a strong command of MVVM-C, VIP, and clean-architecture patterns.
+          Currently building white-label banking technology for financial institutions worldwide at
+          Monument Technology. Integrates AI tooling (Claude Code, GitHub Copilot, agent workflows)
+          as a core part of the development process to ship faster without sacrificing quality.
+        </p>
+      </section>
+
+      <!-- ── Skills ── -->
+      <section class="hire-section">
+        <h2 class="hire-heading">Skills</h2>
+        <div class="skill-table">
+
+          <div class="skill-row">
+            <span class="skill-key">Languages</span>
+            <span class="skill-val">Swift, Objective-C</span>
+          </div>
+
+          <div class="skill-row">
+            <span class="skill-key">Frameworks</span>
+            <span class="skill-val">SwiftUI, UIKit, Combine, Async/Await, XCTest</span>
+          </div>
+
+          <div class="skill-row">
+            <span class="skill-key">Architecture</span>
+            <span class="skill-val">MVVM-C, VIP, MVVM, MVC, SOLID, Design Patterns</span>
+          </div>
+
+          <div class="skill-row">
+            <span class="skill-key">Testing</span>
+            <span class="skill-val">TDD, Unit Testing, UI Testing</span>
+          </div>
+
+          <div class="skill-row">
+            <span class="skill-key">Apple Platforms</span>
+            <span class="skill-val">iPhone, iPad, Apple Watch, Apple TV</span>
+          </div>
+
+          <div class="skill-row">
+            <span class="skill-key">CI / CD</span>
+            <span class="skill-val">GitHub Actions, Bitrise, Azure DevOps, Fastlane</span>
+          </div>
+
+          <div class="skill-row">
+            <span class="skill-key">AI Tooling</span>
+            <span class="skill-val">Claude Code, GitHub Copilot, agent workflows, prompt engineering</span>
+          </div>
+
+          <div class="skill-row">
+            <span class="skill-key">Tools</span>
+            <span class="skill-val">Xcode, Git, SPM, CocoaPods</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── AI & Automation ── -->
+      <section class="hire-section">
+        <h2 class="hire-heading">AI & development workflow</h2>
+        <p class="hire-body">
+          AI tooling is a first-class part of how I work, not an afterthought. I use
+          <strong>Claude Code</strong> and <strong>GitHub Copilot</strong> daily across the full
+          development cycle: from scaffolding new features and generating boilerplate to writing
+          test suites and reviewing diffs.
+        </p>
+        <p class="hire-body">
+          Beyond assisted coding, I build <strong>agent-driven workflows</strong> that automate
+          repetitive engineering tasks: PR description generation, changelog drafting, test
+          coverage checks, and code review pipelines. This means faster iteration cycles without
+          the loss of rigour that usually comes with speed.
+        </p>
+        <p class="hire-body">
+          I keep up with the pace of change in this space, evaluating new models and tools as
+          they land, and bring that into team workflows wherever it creates genuine leverage.
+        </p>
+      </section>
+
+      <!-- ── CI/CD ── -->
+      <section class="hire-section">
+        <h2 class="hire-heading">CI / CD</h2>
+        <p class="hire-body">
+          I've set up and maintained CI pipelines across multiple companies and stacks.
+          At DCA I built the Azure DevOps pipelines from scratch; at Monument Bank I maintained
+          and improved a Bitrise setup that gated every PR with automated test runs. I've used
+          GitHub Actions for workflow automation, release tagging, and enforcing coverage
+          thresholds. I'm comfortable with Fastlane for build, test, and App Store delivery
+          automation.
+        </p>
+        <ul class="hire-list">
+          <li><strong>GitHub Actions</strong>: workflow automation, CI gates, release pipelines</li>
+          <li><strong>Bitrise</strong>: mobile-focused CI, build, test, deploy to TestFlight</li>
+          <li><strong>Azure DevOps</strong>: pipeline setup from scratch, QA integration</li>
+          <li><strong>Fastlane</strong>: match, gym, pilot, automated App Store delivery</li>
+        </ul>
+      </section>
+
+      <!-- ── Experience ── -->
+      <section class="hire-section">
+        <h2 class="hire-heading">Experience</h2>
+
+        <div class="job">
+          <div class="job-top">
+            <span class="job-company">Monument Technology</span>
+            <span class="job-period">May 2025 – present</span>
+          </div>
+          <p class="job-title-label">Software Engineer · London</p>
+          <ul class="hire-list">
+            <li>Building white-label iOS banking solutions for financial institutions worldwide.</li>
+            <li>Delivering tailored Swift and SwiftUI features adapted to each client's architecture and requirements.</li>
+            <li>Working across multiple simultaneous client codebases with varying tech stacks.</li>
+            <li>Integrating AI-assisted workflows to accelerate delivery across all engagements.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <span class="job-company">Monument Bank</span>
+            <span class="job-period">March 2022 – May 2025</span>
+          </div>
+          <p class="job-title-label">iOS Developer · London</p>
+          <ul class="hire-list">
+            <li>Delivered features for a premium UK savings and mortgage banking app.</li>
+            <li>Migrated key features from UIKit to SwiftUI using Combine and MVVM-C.</li>
+            <li>Maintained high test coverage per PR via unit and UI testing.</li>
+            <li>Built reusable SwiftUI components adopted across the entire app.</li>
+            <li>Led code reviews, resolved complex bugs, and improved codebase health.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <span class="job-company">Doctor Care Anywhere (DCA)</span>
+            <span class="job-period">Oct 2021 – March 2022</span>
+          </div>
+          <p class="job-title-label">iOS Developer · London</p>
+          <ul class="hire-list">
+            <li>Worked across a white-label healthcare suite (DCA, Nuffield, HCA, AXA) in Swift, Objective-C, MVVM-C.</li>
+            <li>Migrated legacy Objective-C features to Swift; built new features with strong test coverage.</li>
+            <li>Set up Azure DevOps CI pipelines from scratch; collaborated with QA and design.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <span class="job-company">Pulselive</span>
+            <span class="job-period">March 2019 – Oct 2021</span>
+          </div>
+          <p class="job-title-label">iOS Developer · London</p>
+          <ul class="hire-list">
+            <li>Shipped features for high-traffic global sports apps: Premier League, Rugby World Cup, FIFA World Cup Qatar 2022, FC Barcelona, AFL, ICC Cricket, used by <strong>millions of fans</strong> worldwide.</li>
+            <li>Built MapKit geolocation experiences: stadium detection (FC Barcelona), venue navigation (Rugby World Cup Japan).</li>
+            <li>Developed across iPhone, iPad, and Apple Watch.</li>
+            <li>Migrated architecture from MVC to MVVM and VIP across multiple live codebases.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <span class="job-company">Evident Software</span>
+            <span class="job-period">Aug 2018 – March 2019</span>
+          </div>
+          <p class="job-title-label">iOS Developer · London</p>
+          <ul class="hire-list">
+            <li>Sole iOS developer; built and shipped the company's first iOS app from scratch.</li>
+            <li>MapKit for property annotation, push notifications for visit scheduling, internal location SDK.</li>
+            <li>Owned architecture, App Store releases, and cross-team collaboration.</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- ── Education ── -->
+      <section class="hire-section">
+        <h2 class="hire-heading">Education</h2>
+        <div class="skill-table">
+          <div class="skill-row">
+            <span class="skill-key">2014 – 2016</span>
+            <span class="skill-val">Master's · New Technologies & Media Processes · UNISINOS, Brazil</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-key">2003 – 2007</span>
+            <span class="skill-val">Bachelor's · Mass Communication · UNISINOS, Brazil</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CTA ── -->
+      <section class="hire-cta">
+        <p>Get in touch at <a href="mailto:guibrasilmed@gmail.com">guibrasilmed@gmail.com</a> or connect on <a href="https://linkedin.com/in/guibrasilmed" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .hire {
+    max-width: 76ch;
+    margin-top: 2rem;
+  }
+
+  /* Header */
+  .hire-header {
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hire-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0 0 4px;
+    font-family: var(--font-jetbrains-mono), monospace;
+  }
+
+  .hire-role {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+
+  .hire-contact {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 0;
+    align-items: center;
+  }
+
+  .hire-contact a {
+    color: var(--muted-foreground);
+  }
+
+  .hire-contact a:hover {
+    color: var(--accent);
+  }
+
+  .sep {
+    margin: 0 8px;
+    color: var(--border);
+  }
+
+  /* Sections */
+  .hire-section {
+    margin-bottom: 36px;
+  }
+
+  .hire-heading {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted-foreground);
+    margin: 0 0 14px;
+  }
+
+  /* Summary */
+  .hire-summary {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  .hire-summary strong {
+    color: var(--foreground);
+    font-weight: 700;
+  }
+
+  /* Body paragraphs */
+  .hire-body {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--foreground);
+    margin: 0 0 1em;
+  }
+
+  .hire-body strong {
+    color: var(--foreground);
+    font-weight: 700;
+  }
+
+  /* Skill table */
+  .skill-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 16px;
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.8rem;
+    align-items: baseline;
+  }
+
+  .skill-key {
+    color: var(--muted-foreground);
+    white-space: nowrap;
+  }
+
+  .skill-val {
+    color: var(--foreground);
+  }
+
+  /* Lists */
+  .hire-list {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .hire-list li {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--foreground);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .hire-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.75rem;
+    top: 3px;
+  }
+
+  .hire-list strong {
+    color: var(--foreground);
+    font-weight: 700;
+  }
+
+  /* Jobs */
+  .job {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .job:last-child {
+    border-bottom: none;
+  }
+
+  .job-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+  }
+
+  .job-company {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--foreground);
+  }
+
+  .job-period {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.72rem;
+    color: var(--muted-foreground);
+  }
+
+  .job-title-label {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    margin: 0 0 8px;
+  }
+
+  /* CTA */
+  .hire-cta {
+    margin-top: 8px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.825rem;
+    color: var(--muted-foreground);
+  }
+
+  .hire-cta a {
+    color: var(--accent);
+  }
+
+  .hire-cta a:hover {
+    color: var(--foreground);
+  }
+
+  /* Responsive */
+  @media (max-width: 560px) {
+    .skill-row {
+      grid-template-columns: 120px 1fr;
+    }
+
+    .sep {
+      display: none;
+    }
+
+    .hire-contact {
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+</style>
