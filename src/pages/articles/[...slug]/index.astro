@@ -82,7 +82,11 @@ const tocHeadings = config.features.toc && !hideToc ? headings : [];
 const coverImage =
   typeof initOgImage === "string"
     ? initOgImage
-    : (initOgImage as { src: string } | undefined)?.src;
+    : (initOgImage as { src: string } | undefined)?.src ??
+      (config.features.dynamicOgImage
+        ? getPostUrl(post.id, post.filePath, locale).replace(/\/+$/, "") +
+          "/index.png"
+        : undefined);
 
 let ogImageUrl: string | undefined;
 

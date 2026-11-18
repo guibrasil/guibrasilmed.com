@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
+import config from "@/config";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -11,10 +12,12 @@ type Props = {
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 const { title, description, ogImage, tags, ...props } = data;
 
-const coverSrc =
-  typeof ogImage === "string" ? ogImage : (ogImage as { src: string } | undefined)?.src;
-const firstTag = tags[0];
 const href = getPostUrl(id, filePath, Astro.currentLocale);
+const rawCoverSrc =
+  typeof ogImage === "string" ? ogImage : (ogImage as { src: string } | undefined)?.src;
+const coverSrc =
+  rawCoverSrc ?? (config.features.dynamicOgImage ? `${href}/index.png` : undefined);
+const firstTag = tags[0];
 ---
 
 {
