@@ -3,6 +3,7 @@ title: "What AI gets wrong in Swift (and how to fix it)"
 description: "A practical field guide to the patterns AI tools consistently get wrong in Swift and SwiftUI — with bad code, fixes, and the one-line reason each one matters."
 pubDatetime: 2026-11-19
 tags: [swift, swiftui, ios, ai]
+ogImage: /images/ai-swift-cover.png
 draft: false
 ---
 

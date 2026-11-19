@@ -3,6 +3,7 @@ title: "Swift 6.2: what actually matters"
 description: "Raw identifiers, task naming, improved backtraces. Here's what Swift 6.2 actually changes day-to-day — and what you can safely ignore."
 pubDatetime: 2026-11-22
 tags: [swift, ios]
+ogImage: /images/swift-62-cover.png
 draft: true
 ---
 

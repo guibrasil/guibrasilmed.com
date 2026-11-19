@@ -3,6 +3,7 @@ title: "Why teams are coming back to native (and what took so long)"
 description: "Wave rebuilt their app in Swift and Kotlin. They're not alone. Here's what's actually driving the shift back to native iOS development."
 pubDatetime: 2026-11-21
 tags: [swift, ios, react-native, flutter, architecture]
+ogImage: /images/native-vs-xp-cover.png
 draft: true
 ---
 
