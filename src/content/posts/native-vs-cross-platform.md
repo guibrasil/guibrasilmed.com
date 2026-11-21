@@ -4,7 +4,7 @@ description: "Wave rebuilt their app in Swift and Kotlin. They're not alone. Her
 pubDatetime: 2026-11-21
 tags: [swift, ios, react-native, flutter, architecture]
 ogImage: /images/native-vs-xp-cover.png
-draft: true
+draft: false
 ---
 
 Wave rebuilt their entire mobile app from scratch. Not a rewrite to a new cross-platform framework — a full migration back to native Swift and Kotlin. The kind of decision that takes months of internal debate and a non-trivial engineering budget to execute.
