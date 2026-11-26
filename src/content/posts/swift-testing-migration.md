@@ -4,7 +4,7 @@ description: "Xcode 27.3 completes the Swift Testing story with UI test support.
 pubDatetime: 2026-11-20
 tags: [swift, testing, ios, xcode]
 ogImage: /images/swift-testing-cover.png
-draft: true
+draft: false
 ---
 
 iOS Dev Weekly's headline last week was blunt: "The age of XCTest is over." With Xcode 27.3 beta 2 shipping UI testing support for Swift Testing, that's not hyperbole anymore — it's just accurate. The last blocker is gone.
