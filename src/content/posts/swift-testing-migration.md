@@ -1,7 +1,7 @@
 ---
 title: "Migrating from XCTest to Swift Testing: what actually changes"
 description: "Xcode 27.3 completes the Swift Testing story with UI test support. Here's what the migration actually looks like — and why the new mental model is worth the switch."
-pubDatetime: 2026-11-20
+pubDatetime: 2026-11-26
 tags: [swift, testing, ios, xcode]
 ogImage: /images/swift-testing-cover.png
 draft: false
