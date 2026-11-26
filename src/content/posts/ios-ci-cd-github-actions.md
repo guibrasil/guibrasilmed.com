@@ -7,7 +7,7 @@ ogImage: /images/ios-cicd-cover.png
 draft: false
 ---
 
-Most iOS teams spend more time fighting their CI than writing code. Xcode versioning, code signing, simulator selection, derived data caching — each one is a small problem, but together they make iOS pipelines brittle and slow. GitHub Actions gives you enough control to fix all of it, and its reusable workflows let you do it once and apply it everywhere.
+Most iOS teams spend more time fighting their CI than writing code. Xcode versioning, code signing, simulator selection, derived data caching: each one is a small problem, but together they make iOS pipelines brittle and slow. GitHub Actions gives you enough control to fix all of it, and its reusable workflows let you do it once and apply it everywhere.
 
 This is the setup I've landed on after running iOS CI across multiple projects simultaneously.
 
@@ -43,7 +43,7 @@ jobs:
             | xcpretty
 ```
 
-Two things worth noting here. First, pin Xcode explicitly with `xcode-select` — GitHub's macOS runners ship with multiple Xcode versions, and the default changes without warning when Apple updates the runner image. Second, `xcpretty` makes the output readable; without it you're staring at thousands of lines of raw `xcodebuild` logs.
+Two things worth noting here. First, pin Xcode explicitly with `xcode-select`: GitHub's macOS runners ship with multiple Xcode versions, and the default changes without warning when Apple updates the runner image. Second, `xcpretty` makes the output readable; without it you're staring at thousands of lines of raw `xcodebuild` logs.
 
 ## Caching derived data and SPM packages
 
@@ -65,13 +65,13 @@ A cold iOS build with SPM dependencies can take 8–12 minutes. Caching brings t
           restore-keys: derived-${{ runner.os }}-
 ```
 
-The cache key uses `Package.resolved` for SPM so it invalidates exactly when dependencies change. For derived data, hashing Swift sources gives a reasonable signal — you get a cache hit on unchanged code and a miss when something meaningful changes.
+The cache key uses `Package.resolved` for SPM so it invalidates exactly when dependencies change. For derived data, hashing Swift sources gives a reasonable signal: you get a cache hit on unchanged code and a miss when something meaningful changes.
 
 ## Extracting a composite action
 
 Once this works in one project, the temptation is to copy the YAML into every other repo. Don't. Instead, pull the reusable parts into a composite action you can reference from anywhere.
 
-A composite action lives in a repo — either your app repo under `.github/actions/`, or a dedicated shared repo like `your-org/ios-actions`. The structure looks like this:
+A composite action lives in a repo, either your app repo under `.github/actions/`, or a dedicated shared repo like `your-org/ios-actions`. The structure looks like this:
 
 ```
 ios-actions/
@@ -128,7 +128,7 @@ Any project can now use this with one line:
 
 ## Reusable workflows across repositories
 
-Composite actions extract steps. Reusable workflows extract entire jobs — including the runner, environment, and job-level configuration. This is the right level of abstraction for an iOS pipeline.
+Composite actions extract steps. Reusable workflows extract entire jobs, including the runner, environment, and job-level configuration. This is the right level of abstraction for an iOS pipeline.
 
 In your shared repo, create a callable workflow:
 
@@ -184,7 +184,7 @@ jobs:
     secrets: inherit
 ```
 
-`secrets: inherit` passes the calling repo's secrets into the reusable workflow without listing them individually — essential for signing credentials that differ per project.
+`secrets: inherit` passes the calling repo's secrets into the reusable workflow without listing them individually, which is essential for signing credentials that differ per project.
 
 ## Code signing with Fastlane match
 
@@ -200,7 +200,7 @@ Add a signing step to your reusable workflow:
         run: bundle exec fastlane match appstore --readonly
 ```
 
-`--readonly` is important in CI — you never want the pipeline to regenerate or revoke certificates. It fetches what's already there and installs it into the keychain.
+`--readonly` is important in CI: you never want the pipeline to regenerate or revoke certificates. It fetches what's already there and installs it into the keychain.
 
 ## Deploying to TestFlight
 
@@ -229,12 +229,12 @@ The deploy job should be separate from the test job and only run on pushes to `m
         run: bundle exec fastlane deliver_testflight
 ```
 
-The App Store Connect API key is the right credential here — it doesn't expire like Apple ID sessions do, which is what breaks most pipelines six months after you set them up.
+The App Store Connect API key is the right credential here: it doesn't expire like Apple ID sessions do, which is what breaks most pipelines six months after you set them up.
 
 ## What this looks like across multiple projects
 
 Once the shared repo exists, adding CI to a new iOS project takes about five minutes: create `.github/workflows/ci.yml`, point it at the reusable workflow, pass the scheme name, and done. The caching, signing, and deployment logic is maintained in one place.
 
-When you need to bump Xcode — which happens every major release cycle — you change the default in the shared action and every project picks it up on the next run. No hunting through repos.
+When you need to bump Xcode, which happens every major release cycle, you change the default in the shared action and every project picks it up on the next run. No hunting through repos.
 
 The upfront investment in the shared repo pays back quickly. The third project you set up with it will have taken less total effort than the first project did with bespoke YAML.

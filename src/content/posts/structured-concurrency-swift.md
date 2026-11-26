@@ -1,13 +1,13 @@
 ---
 title: "Structured concurrency in Swift: what actually changes"
-description: "async/await is easy to adopt. Structured concurrency — task trees, cancellation, task groups — is where the real shift happens."
+description: "async/await is easy to adopt. Structured concurrency (task trees, cancellation, task groups) is where the real shift happens."
 pubDatetime: 2026-07-22
 tags: [swift, concurrency, ios]
 ogImage: /images/swift-concurrency-cover.png
 draft: false
 ---
 
-Swift's concurrency model landed with a lot of fanfare around `async/await`, and most teams adopted the syntax quickly. But the deeper shift — structured concurrency — is subtler and more important. This is what I've found actually changes day-to-day after a year of writing concurrent Swift seriously.
+Swift's concurrency model landed with a lot of fanfare around `async/await`, and most teams adopted the syntax quickly. But the deeper shift, structured concurrency, is subtler and more important. This is what I've found actually changes day-to-day after a year of writing concurrent Swift seriously.
 
 ## The problem with unstructured concurrency
 
@@ -17,7 +17,7 @@ The structural problem is that lifetimes aren't expressed in the code. You can't
 
 ## What structured concurrency actually means
 
-Structured concurrency means tasks have a defined scope. When the scope exits, its child tasks are cancelled and awaited. This is the same principle as structured programming — `if`, `for`, functions — applied to async work.
+Structured concurrency means tasks have a defined scope. When the scope exits, its child tasks are cancelled and awaited. This is the same principle as structured programming (`if`, `for`, functions) applied to async work.
 
 ```swift
 func loadDashboard() async throws -> Dashboard {
@@ -27,11 +27,11 @@ func loadDashboard() async throws -> Dashboard {
 }
 ```
 
-Both `fetchUser` and `fetchFeed` run concurrently, but they are children of `loadDashboard`. If `loadDashboard` is cancelled — because the user navigated away — both children are cancelled automatically. You don't write cancellation logic. The structure enforces it.
+Both `fetchUser` and `fetchFeed` run concurrently, but they are children of `loadDashboard`. If `loadDashboard` is cancelled (because the user navigated away), both children are cancelled automatically. You don't write cancellation logic. The structure enforces it.
 
 ## Task groups for dynamic concurrency
 
-`async let` works when you know the number of concurrent tasks at compile time. For dynamic cases — processing an array of items concurrently — use `withTaskGroup`:
+`async let` works when you know the number of concurrent tasks at compile time. For dynamic cases (processing an array of items concurrently), use `withTaskGroup`:
 
 ```swift
 func fetchAll(ids: [String]) async throws -> [Item] {
@@ -50,7 +50,7 @@ The group and all its tasks are scoped to the `withThrowingTaskGroup` call. When
 
 Actors solve data races but introduce their own friction. Crossing actor boundaries with `await` in tight loops is expensive. And `MainActor` inference can produce surprising behaviour when a class conforms to a protocol that isn't `MainActor`-isolated.
 
-The model is sound. The ergonomics are still being worked out — each Swift release tightens them. The investment is worth it.
+The model is sound. The ergonomics are still being worked out, and each Swift release tightens them. The investment is worth it.
 
 ## The practical upshot
 

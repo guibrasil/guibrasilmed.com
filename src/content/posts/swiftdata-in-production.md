@@ -76,7 +76,7 @@ final class Track {
 }
 ```
 
-Reasonable thing to want. Turns out CloudKit sync requires that every attribute be optional or have a default value. `@Attribute(.unique)` violates CloudKit's constraint model in ways that SwiftData does not warn you about at compile time or at runtime — it just silently stops syncing.
+Reasonable thing to want. Turns out CloudKit sync requires that every attribute be optional or have a default value. `@Attribute(.unique)` violates CloudKit's constraint model in ways that SwiftData does not warn you about at compile time or at runtime: it just silently stops syncing.
 
 The fix: drop `.unique` and enforce uniqueness in your own insertion logic.
 
@@ -95,7 +95,7 @@ More code. No mysterious sync failures.
 
 ### Cascade delete behaviour is not obvious
 
-Add a relationship and you get cascade deletes — sometimes. It depends on how you declared the relationship and whether the inverse is set up correctly.
+Add a relationship and you get cascade deletes, sometimes. It depends on how you declared the relationship and whether the inverse is set up correctly.
 
 ```swift
 @Model
@@ -122,13 +122,13 @@ let lowercased = "radiohead"
 let predicate = #Predicate<Track> { $0.artist.lowercased() == lowercased }
 ```
 
-String transformations, custom comparators, computed properties — they're all off-limits inside `#Predicate`. When you hit the wall, you have two options: restructure your model to store a pre-computed field (store a `searchableArtist` lowercased string alongside `artist`), or fetch a broader set and filter in memory.
+String transformations, custom comparators, computed properties: they're all off-limits inside `#Predicate`. When you hit the wall, you have two options: restructure your model to store a pre-computed field (store a `searchableArtist` lowercased string alongside `artist`), or fetch a broader set and filter in memory.
 
 Neither is great. It's a real limitation and the error messages aren't always helpful.
 
 ### Large datasets expose the performance ceiling
 
-SwiftData is not Core Data. It's built on top of Core Data, but the abstraction layer has overhead. For most apps — dozens to a few hundred records — you won't notice. For thousands of records with complex relationships and frequent queries, you will.
+SwiftData is not Core Data. It's built on top of Core Data, but the abstraction layer has overhead. For most apps (dozens to a few hundred records) you won't notice. For thousands of records with complex relationships and frequent queries, you will.
 
 My threshold: around 2,000 records with multi-hop relationship traversal, SwiftUI list scroll performance degraded noticeably. The fix was to drop down to Core Data's `NSFetchRequest` with batch sizes and `returnsObjectsAsFaults`.
 
@@ -212,7 +212,7 @@ await MainActor.run {
 
 `VersionedSchema` and `SchemaMigrationPlan` are genuinely well-designed APIs. The issue is that the documentation covers the happy path: rename a property, add a default, done.
 
-Real migrations are messier. When you need to transform data — not just reshape the schema — you write a `MigrationStage.custom` with a `willMigrate` or `didMigrate` closure. That closure gives you access to a `ModelContext` for the source schema. It works, but the documentation for this case is thin, and it's easy to write a migration that runs successfully and silently drops data.
+Real migrations are messier. When you need to transform data, not just reshape the schema, you write a `MigrationStage.custom` with a `willMigrate` or `didMigrate` closure. That closure gives you access to a `ModelContext` for the source schema. It works, but the documentation for this case is thin, and it's easy to write a migration that runs successfully and silently drops data.
 
 My advice: test migrations on a copy of real production data before shipping. The simulator is not enough. Use `XCTestCase` with an on-disk store seeded to match your previous schema, then verify record counts and relationships after migration.
 

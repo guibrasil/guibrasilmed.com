@@ -1,13 +1,13 @@
 ---
 title: "Migrating from XCTest to Swift Testing: what actually changes"
-description: "Xcode 27.3 completes the Swift Testing story with UI test support. Here's what the migration actually looks like — and why the new mental model is worth the switch."
+description: "Xcode 27.3 completes the Swift Testing story with UI test support. Here's what the migration actually looks like, and why the new mental model is worth the switch."
 pubDatetime: 2026-11-26
 tags: [swift, testing, ios, xcode]
 ogImage: /images/swift-testing-cover.png
 draft: false
 ---
 
-iOS Dev Weekly's headline last week was blunt: "The age of XCTest is over." With Xcode 27.3 beta 2 shipping UI testing support for Swift Testing, that's not hyperbole anymore — it's just accurate. The last blocker is gone.
+iOS Dev Weekly's headline last week was blunt: "The age of XCTest is over." With Xcode 27.3 beta 2 shipping UI testing support for Swift Testing, that's not hyperbole anymore: it's just accurate. The last blocker is gone.
 
 Depop just migrated 10,000+ unit tests with AI assistance. If that doesn't make you at least curious, I don't know what will.
 
@@ -19,7 +19,7 @@ Here's what the migration actually looks like.
 
 XCTest was designed in a different era. It shows.
 
-The API is stringly-typed in places that don't need to be. Failure messages are cryptic when they should be obvious. The `setUp`/`tearDown` dance is verbose boilerplate that you write without thinking, every single time. And parameterised tests — running the same test with multiple inputs — simply don't exist. You hand-roll them with loops, or you don't bother.
+The API is stringly-typed in places that don't need to be. Failure messages are cryptic when they should be obvious. The `setUp`/`tearDown` dance is verbose boilerplate that you write without thinking, every single time. And parameterised tests (running the same test with multiple inputs) simply don't exist. You hand-roll them with loops, or you don't bother.
 
 Here's a typical XCTest failure message when two arrays don't match:
 
@@ -35,9 +35,9 @@ Compare that to what Swift Testing shows you. Exactly which element differed, in
 
 Three things to internalize:
 
-- `#expect(condition)` — the universal assertion macro. It captures the expression so it can show you exactly what went wrong.
-- `@Test` — marks a function as a test. No class required, no naming convention required, no inheriting from `XCTestCase`.
-- `@Suite` — optional grouping. Use it when you want shared state or a logical namespace.
+- `#expect(condition)`: the universal assertion macro. It captures the expression so it can show you exactly what went wrong.
+- `@Test`: marks a function as a test. No class required, no naming convention required, no inheriting from `XCTestCase`.
+- `@Suite`: optional grouping. Use it when you want shared state or a logical namespace.
 
 That's the whole API surface for the common case. The rest is ergonomics on top.
 
@@ -59,7 +59,7 @@ XCTAssertNil(response.error)
 #expect(response.error == nil)
 ```
 
-The `#expect` macro takes any boolean expression. No more memorising which variant of `XCTAssert*` to use. When a check fails, the macro expands to show you the actual values on both sides of the operator — not just "false is not true".
+The `#expect` macro takes any boolean expression. No more memorising which variant of `XCTAssert*` to use. When a check fails, the macro expands to show you the actual values on both sides of the operator, not just "false is not true".
 
 ### Setup and teardown
 
@@ -114,7 +114,7 @@ func testFetchUser() async throws {
 }
 ```
 
-Same shape, less ceremony. Swift Testing supports `async throws` natively — no `expectation(description:)`, no `waitForExpectations`, no XCTestExpectation at all for async work.
+Same shape, less ceremony. Swift Testing supports `async throws` natively, with no `expectation(description:)`, no `waitForExpectations`, no XCTestExpectation at all for async work.
 
 ### Parameterised tests
 
@@ -199,7 +199,7 @@ struct OnboardingUITests {
 }
 ```
 
-The `.serialized` suite trait is important — UI tests interact with a running process, so they can't run in parallel. Swift Testing runs tests concurrently by default, so you need to opt out explicitly.
+The `.serialized` suite trait is important: UI tests interact with a running process, so they can't run in parallel. Swift Testing runs tests concurrently by default, so you need to opt out explicitly.
 
 The `#expect` macro replaces `XCTAssert*` even inside UI tests. The mental model is consistent throughout.
 
@@ -213,7 +213,7 @@ A practical approach:
 
 1. **New tests go in Swift Testing.** Don't write another `XCTestCase` subclass. Every new test file uses `@Test` from day one.
 2. **Migrate when you touch a file.** If you're fixing a bug in `CartTests.swift`, convert that file while you're in there. Boy scout rule.
-3. **Prioritise parameterised candidates.** Find your loop-based tests and convert them first — they get the most visible benefit.
+3. **Prioritise parameterised candidates.** Find your loop-based tests and convert them first, as they get the most visible benefit.
 4. **Leave legacy UI tests for now.** If you're not on Xcode 27.3 yet, don't rush it. The old `XCUITest` subclass approach still works fine.
 
 One thing to watch: `@Suite` structs get a new instance per test, which is different from `XCTestCase` where `setUp` runs before each test on the same instance. If you're sharing expensive state across tests (a database connection, a compiled regex), use a class-based suite or restructure.
@@ -228,7 +228,7 @@ Performance tests with `measure {}` don't have a Swift Testing equivalent yet. I
 
 The Xcode test report UI also still shows XCTest results slightly more prominently in some views, but that's a tooling detail that will close over time.
 
-For everything else — unit tests, integration tests, now UI tests — Swift Testing is the better tool.
+For everything else (unit tests, integration tests, now UI tests), Swift Testing is the better tool.
 
 ---
 

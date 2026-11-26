@@ -1,15 +1,15 @@
 ---
 title: "What AI gets wrong in Swift (and how to fix it)"
-description: "A practical field guide to the patterns AI tools consistently get wrong in Swift and SwiftUI — with bad code, fixes, and the one-line reason each one matters."
+description: "A practical field guide to the patterns AI tools consistently get wrong in Swift and SwiftUI, with bad code, fixes, and the one-line reason each one matters."
 pubDatetime: 2026-11-19
 tags: [swift, swiftui, ios, ai]
 ogImage: /images/ai-swift-cover.png
 draft: false
 ---
 
-I use AI tools every day. Cursor, Claude, Copilot — all of them. They're genuinely useful for scaffolding, boilerplate, and the kind of code I'd otherwise write on autopilot. But I've been reviewing AI-generated Swift long enough to recognise the patterns in what they consistently get wrong. Same mistakes, different projects, different tools.
+I use AI tools every day. Cursor, Claude, Copilot: all of them. They're genuinely useful for scaffolding, boilerplate, and the kind of code I'd otherwise write on autopilot. But I've been reviewing AI-generated Swift long enough to recognise the patterns in what they consistently get wrong. Same mistakes, different projects, different tools.
 
-This is not an "AI bad" article. It's a field guide. These are the things I check for the moment a PR has that AI-shaped smell — confident, compiling, and subtly wrong.
+This is not an "AI bad" article. It's a field guide. These are the things I check for the moment a PR has that AI-shaped smell: confident, compiling, and subtly wrong.
 
 ---
 
@@ -48,7 +48,7 @@ struct MyView: View {
 
 `@Observable` is a macro, not a protocol. No `@Published` on every property. No `@StateObject` / `@ObservedObject` split to manage. SwiftUI tracks granular property access instead of invalidating the whole view on any change. This is a real performance win, not just a cosmetic upgrade.
 
-If your minimum deployment target is iOS 17 — and it should be by now — there is no reason to reach for `ObservableObject`.
+If your minimum deployment target is iOS 17, and it should be by now, there is no reason to reach for `ObservableObject`.
 
 ### Computed properties for view decomposition
 
@@ -72,7 +72,7 @@ struct ContentView: View {
 }
 ```
 
-The problem: `header` is not a separate view. It's a computed property on `ContentView`. When *anything* in `ContentView` changes, `header` re-evaluates. You've also broken the precise observation tracking that `@Observable` relies on. SwiftUI tracks which properties are accessed inside a view's `body`. Computed properties on the parent view are inside the parent's body, so the parent owns the observation — not the extracted piece.
+The problem: `header` is not a separate view. It's a computed property on `ContentView`. When *anything* in `ContentView` changes, `header` re-evaluates. You've also broken the precise observation tracking that `@Observable` relies on. SwiftUI tracks which properties are accessed inside a view's `body`. Computed properties on the parent view are inside the parent's body, so the parent owns the observation, not the extracted piece.
 
 Fix: make it a proper view.
 
@@ -130,7 +130,7 @@ NavigationStack {
 }
 ```
 
-`NavigationView` has a list of well-documented problems — the split-view behaviour on iPad, the double-column issue, the fact that programmatic navigation was a nightmare. `NavigationStack` with a path solves all of it. If the model gives you `NavigationView`, flag it immediately.
+`NavigationView` has a list of well-documented problems: the split-view behaviour on iPad, the double-column issue, the fact that programmatic navigation was a nightmare. `NavigationStack` with a path solves all of it. If the model gives you `NavigationView`, flag it immediately.
 
 ### `onChange(of:)` with the old 1-parameter closure
 
@@ -200,7 +200,7 @@ The nanoseconds API was the original. `Duration`-based sleep was added in Swift 
 
 ### Excessive `@MainActor` annotation
 
-Flip side of the previous point: I see AI-generated code that slaps `@MainActor` on everything — every method, every class — as if it were a defensive measure.
+Flip side of the previous point: I see AI-generated code that slaps `@MainActor` on everything, every method, every class, as if it were a defensive measure.
 
 ```swift
 // Unnecessary — actor isolation is already inherited from @MainActor on the type
@@ -260,7 +260,7 @@ Button("Submit") { submit() }
 Every AI tool will occasionally invent APIs. The pattern is always the same: the name sounds right, the method signature is plausible, the usage makes intuitive sense, and it doesn't exist.
 
 Recent examples I've actually seen:
-- `.searchable(prompt:)` — the modifier exists, but `prompt` takes `Text`, not a `String` directly
+- `.searchable(prompt:)`: the modifier exists, but `prompt` takes `Text`, not a `String` directly
 - Modifier chaining orders that compile but have no effect (`.padding().background()` vs `.background().padding()`)
 - SPM targets with names that follow Apple's patterns but were removed or never shipped
 - `Environment` values that sound like they should exist (`\.colorSchemeContrast` is real; variations on it are not)
@@ -281,6 +281,6 @@ A few habits that pay off:
 
 ---
 
-The take is this: AI tools are a multiplier on what you already know. They make a senior engineer faster. They make a junior engineer produce senior-looking code that may or may not work correctly. The difference is whether the person reviewing — or writing — knows the platform well enough to catch what the model missed.
+The take is this: AI tools are a multiplier on what you already know. They make a senior engineer faster. They make a junior engineer produce senior-looking code that may or may not work correctly. The difference is whether the person reviewing, or writing, knows the platform well enough to catch what the model missed.
 
 These mistakes aren't going to kill your app. They'll make it slower to maintain, harder to reason about, and subtly wrong in ways that show up at the worst times. Knowing the platform isn't optional just because the tool compiles.

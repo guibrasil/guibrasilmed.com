@@ -1,6 +1,6 @@
 ---
 title: "Swift 6.2: what actually matters"
-description: "Raw identifiers, task naming, improved backtraces. Here's what Swift 6.2 actually changes day-to-day — and what you can safely ignore."
+description: "Raw identifiers, task naming, improved backtraces. Here's what Swift 6.2 actually changes day-to-day, and what you can safely ignore."
 pubDatetime: 2026-11-22
 tags: [swift, ios]
 ogImage: /images/swift-62-cover.png
@@ -13,7 +13,7 @@ Here's what actually matters.
 
 ## Raw identifiers
 
-Swift has always let you escape reserved words with backticks — `let \`class\` = "UIView"` — but 6.2 extends this to work consistently across all identifier positions, including places where the compiler previously choked or produced confusing errors.
+Swift has always let you escape reserved words with backticks (like `let \`class\` = "UIView"`), but 6.2 extends this to work consistently across all identifier positions, including places where the compiler previously choked or produced confusing errors.
 
 The practical win is in two areas: DSLs and test names.
 
@@ -39,7 +39,7 @@ let result = Query()
     .`if`(isAdmin) { $0.including(.adminFields) }
 ```
 
-**Test names.** XCTest method names have to start with `test`, but Swift Testing lets you name tests anything. The problem is that descriptive test names often want to say things like "given the user is logged in, when they tap logout, then the session ends" — and that often means using words that are keywords.
+**Test names.** XCTest method names have to start with `test`, but Swift Testing lets you name tests anything. The problem is that descriptive test names often want to say things like "given the user is logged in, when they tap logout, then the session ends," and that often means using words that are keywords.
 
 ```swift
 // Swift Testing — now valid
@@ -92,7 +92,7 @@ This should be a habit, not an afterthought. Add names to every `Task` you creat
 
 ## Improved backtraces
 
-Swift 6.2 ships improved symbolic backtrace support, with better demangling and frame resolution — particularly for async functions and actor-isolated code, where stack traces have historically been nearly unreadable.
+Swift 6.2 ships improved symbolic backtrace support, with better demangling and frame resolution, particularly for async functions and actor-isolated code, where stack traces have historically been nearly unreadable.
 
 Before, a crash in async code could produce frames like:
 
@@ -108,13 +108,13 @@ frame #3: MyApp`MyViewModel.load() async -> ()
 frame #4: MyApp`ProfileView.body.getter
 ```
 
-This isn't a code change — you don't adopt it, you just benefit from it. But it compounds with task naming. Named tasks + improved backtraces means you can actually read a crash report from concurrent code and understand what happened.
+This isn't a code change; you don't adopt it, you just benefit from it. But it compounds with task naming. Named tasks + improved backtraces means you can actually read a crash report from concurrent code and understand what happened.
 
 ## `@_used` attribute
 
 This one is niche but solves a real problem if you've hit it.
 
-The linker strips unused symbols by default. That's usually fine. But sometimes you have symbols that *look* unused — no call site in Swift code — but are referenced at runtime: via Objective-C, via `dlsym`, via a plugin system, or via a registration pattern.
+The linker strips unused symbols by default. That's usually fine. But sometimes you have symbols that *look* unused (no call site in Swift code) but are referenced at runtime: via Objective-C, via `dlsym`, via a plugin system, or via a registration pattern.
 
 ```swift
 // Before: the linker silently strips this, your plugin system breaks at runtime
@@ -138,11 +138,11 @@ class MyPlugin: NSObject, PluginProtocol {
 
 The `@_used` attribute is spelled with an underscore because it's technically underscored (not yet formally stable API), but it's supported and intentional. If you're building modular apps with plugin architectures, dynamic feature registration, or anything that uses `@objc` registration patterns without explicit call sites, this is worth knowing.
 
-Most apps won't need it. When you do need it, you'll know — it'll be a "my code vanishes at runtime" bug.
+Most apps won't need it. When you do need it, you'll know: it'll be a "my code vanishes at runtime" bug.
 
 ## Noncopyable improvements
 
-Swift's `~Copyable` story has been evolving since 5.9. 6.2 continues that by allowing `~Copyable` conformances in more generic contexts — specifically, more protocol constraints and conditional conformances now work correctly with noncopyable types.
+Swift's `~Copyable` story has been evolving since 5.9. 6.2 continues that by allowing `~Copyable` conformances in more generic contexts; specifically, more protocol constraints and conditional conformances now work correctly with noncopyable types.
 
 ```swift
 // Before: this would produce a compiler error or require workarounds
@@ -167,10 +167,10 @@ func use<R: Resource & ~Copyable>(_ resource: consuming R) {
 }
 ```
 
-For most app developers, noncopyable types are still fairly exotic. Where they matter: file handles, network connections, cryptographic contexts — anything where accidental copying is a bug, not a performance concern. If you're wrapping low-level C APIs, `~Copyable` gives you compile-time enforcement of single-ownership semantics.
+For most app developers, noncopyable types are still fairly exotic. Where they matter: file handles, network connections, cryptographic contexts, anything where accidental copying is a bug, not a performance concern. If you're wrapping low-level C APIs, `~Copyable` gives you compile-time enforcement of single-ownership semantics.
 
 ## What you can safely ignore
 
 **Compile-time constant improvements.** Useful if you're doing embedded Swift or writing compiler plugins. For app developers, this doesn't change day-to-day work. The existing `#if` and `@_const` machinery works the same way; 6.2 expands what's expressible in those contexts.
 
-The theme in 6.2 is ergonomics. These aren't new paradigms — they're the runtime story getting better (backtraces, task naming) and the language removing friction in specific corners (raw identifiers, noncopyable generics). Adopt the naming habit today. Everything else you'll reach for when you need it.
+The theme in 6.2 is ergonomics. These aren't new paradigms: they're the runtime story getting better (backtraces, task naming) and the language removing friction in specific corners (raw identifiers, noncopyable generics). Adopt the naming habit today. Everything else you'll reach for when you need it.

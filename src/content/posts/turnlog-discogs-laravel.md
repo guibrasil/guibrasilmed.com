@@ -1,6 +1,6 @@
 ---
 title: "Building a Discogs API layer in Laravel: how TurnLog talks to vinyl data"
-description: "How I built the Discogs integration for TurnLog — a vinyl collection tracker — with a clean interface, caching decorator, exception hierarchy, and a fake client that makes testing painless."
+description: "How I built the Discogs integration for TurnLog, a vinyl collection tracker, with a clean interface, caching decorator, exception hierarchy, and a fake client that makes testing painless."
 pubDatetime: 2026-11-18
 tags: [laravel, php, api, vinyl]
 ogImage: /images/turnlog-discogs-cover.png
@@ -9,7 +9,7 @@ draft: false
 
 TurnLog is a vinyl collection tracker. The whole point of it is that you scan or search for a record, it fetches the data from Discogs, and you log it to your collection. That means every core feature lives or dies on how well the Discogs integration holds up.
 
-Discogs has a decent API. It has 60 million releases in its database. It also has rate limits, a quirky title format, pagination that bites you if you're not careful, and search results that return the same album fifteen times in different pressings. None of that is unfair — it's just what you're working with.
+Discogs has a decent API. It has 60 million releases in its database. It also has rate limits, a quirky title format, pagination that bites you if you're not careful, and search results that return the same album fifteen times in different pressings. None of that is unfair; it's just what you're working with.
 
 Here is what I built to handle it, and why.
 
@@ -17,9 +17,9 @@ Here is what I built to handle it, and why.
 
 The app needs three things from Discogs:
 
-- **Search releases by text** — user types "Pink Floyd" or "Lateralus", gets back a list of records
-- **Search by barcode** — user scans the barcode on the sleeve, gets the release
-- **Fetch a full release by ID** — once you pick a release from search results, pull its tracklist, images, label, year
+- **Search releases by text**: user types "Pink Floyd" or "Lateralus", gets back a list of records
+- **Search by barcode**: user scans the barcode on the sleeve, gets the release
+- **Fetch a full release by ID**: once you pick a release from search results, pull its tracklist, images, label, year
 
 That's it. No write operations. No OAuth dance. Discogs lets you generate a personal access token and pass it in a header, so authentication is one environment variable and one line of code.
 
@@ -38,7 +38,7 @@ interface DiscogsClient
 
 Three methods. Returns arrays because Discogs JSON maps directly to PHP arrays and adding a full DTO layer for external data you don't fully control is more pain than it's worth at this stage.
 
-The reason for the interface isn't abstraction for its own sake. It's because there will be three implementations — one that talks to Discogs, one that wraps it in a cache, and one you use in tests. The interface is the only thing the rest of the app sees.
+The reason for the interface isn't abstraction for its own sake. It's because there will be three implementations: one that talks to Discogs, one that wraps it in a cache, and one you use in tests. The interface is the only thing the rest of the app sees.
 
 ## The HTTP client
 
@@ -88,11 +88,11 @@ final class HttpDiscogsClient implements DiscogsClient
 
 A few decisions worth noting.
 
-**The vinyl filters are hardcoded.** `format: Vinyl` and `status: Official` are not configurable. TurnLog is a vinyl tracker — there is no use case where you want CD results or unofficial bootlegs showing up in search. Making it a config option would just be code that never gets changed.
+**The vinyl filters are hardcoded.** `format: Vinyl` and `status: Official` are not configurable. TurnLog is a vinyl tracker: there is no use case where you want CD results or unofficial bootlegs showing up in search. Making it a config option would just be code that never gets changed.
 
 **The User-Agent is set explicitly.** Discogs requires it. If you omit it, requests start failing. The docs mention this but not loudly enough.
 
-**Error mapping happens in `throw()`.** Laravel's HTTP client lets you pass a callback to `throw()` that runs on any non-2xx response. This is the right place to map HTTP status codes to domain exceptions — the calling code never sees an `HttpClientException`, it sees a `DiscogsRateLimitException` with a `retryAfter()` method.
+**Error mapping happens in `throw()`.** Laravel's HTTP client lets you pass a callback to `throw()` that runs on any non-2xx response. This is the right place to map HTTP status codes to domain exceptions: the calling code never sees an `HttpClientException`, it sees a `DiscogsRateLimitException` with a `retryAfter()` method.
 
 ## Exception hierarchy
 
@@ -228,7 +228,7 @@ final class ReleaseService
 
 ### Master deduplication
 
-A search for "Dark Side of the Moon" returns the original pressing, the 180g reissue, the EU repress, the Japan pressing, the MFSL, and twelve more. Each is a separate Discogs release with the same `master_id`. For a collection tracker, you want one result per album — the user picks the specific pressing later.
+A search for "Dark Side of the Moon" returns the original pressing, the 180g reissue, the EU repress, the Japan pressing, the MFSL, and twelve more. Each is a separate Discogs release with the same `master_id`. For a collection tracker, you want one result per album; the user picks the specific pressing later.
 
 The deduplication keeps the first result per `master_id`, and always keeps results with no `master_id` (some releases aren't linked to a master):
 
@@ -247,7 +247,7 @@ private function deduplicateByMaster(array $results): array
 
 ### Two-phase lookup
 
-`find()` checks the local database before hitting Discogs. If the release was imported before, it comes from the DB. The Discogs API is only called on the first request for any given release. After that, 24-hour cache → local DB mean the external API is out of the picture entirely.
+`find()` checks the local database before hitting Discogs. If the release was imported before, it comes from the DB. The Discogs API is only called on the first request for any given release. After that, the 24-hour cache and local DB mean the external API is out of the picture entirely.
 
 ## Storing raw JSON
 
@@ -270,7 +270,7 @@ Release::updateOrCreate(
 );
 ```
 
-The structured columns hold what the app displays. The `raw` column holds everything Discogs gave you. This costs a bit of storage and pays for itself constantly: extracting the tracklist, surfacing genres, adding new fields to the API response — it all works from the stored JSON without re-fetching. When Discogs changes something in their response format you can re-derive the structured columns from stored data instead of re-importing.
+The structured columns hold what the app displays. The `raw` column holds everything Discogs gave you. This costs a bit of storage and pays for itself constantly: extracting the tracklist, surfacing genres, adding new fields to the API response: it all works from the stored JSON without re-fetching. When Discogs changes something in their response format you can re-derive the structured columns from stored data instead of re-importing.
 
 ## Parsing "Artist - Album"
 
@@ -322,7 +322,7 @@ final class FakeDiscogsClient implements DiscogsClient
 }
 ```
 
-This isn't a mock — it's a full implementation that runs in the service container. Tests configure state, make HTTP requests through the actual routes, and assert on the JSON response. The entire stack runs (validation, service layer, response resources) without a single outbound request.
+This isn't a mock; it's a full implementation that runs in the service container. Tests configure state, make HTTP requests through the actual routes, and assert on the JSON response. The entire stack runs (validation, service layer, response resources) without a single outbound request.
 
 ```php
 it('returns 503 when Discogs rate-limits the request', function () {
@@ -340,8 +340,8 @@ it('returns 503 when Discogs rate-limits the request', function () {
 
 ## What I'd change
 
-The passive rate-limit strategy (throw an exception, let the client retry) is fine at current scale. If TurnLog ever runs background imports for large collections it'll need a queue with exponential backoff — the exception already carries `retryAfter()` so the data is there, it just needs a worker that uses it.
+The passive rate-limit strategy (throw an exception, let the client retry) is fine at current scale. If TurnLog ever runs background imports for large collections it'll need a queue with exponential backoff: the exception already carries `retryAfter()` so the data is there, it just needs a worker that uses it.
 
-The token auth is also fine right now. Discogs supports OAuth 1.0 for user-level access (reading private collections, writing ownership data). TurnLog stores its own collection records, so there's no need to touch a user's Discogs account. If that changes, the `DiscogsClient` interface stays the same — only `HttpDiscogsClient` grows.
+The token auth is also fine right now. Discogs supports OAuth 1.0 for user-level access (reading private collections, writing ownership data). TurnLog stores its own collection records, so there's no need to touch a user's Discogs account. If that changes, the `DiscogsClient` interface stays the same; only `HttpDiscogsClient` grows.
 
 The rest of the layer I'd build the same way again.
