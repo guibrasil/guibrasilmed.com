@@ -1,10 +1,10 @@
 ---
 title: "Swift 6.2: what actually matters"
 description: "Raw identifiers, task naming, improved backtraces. Here's what Swift 6.2 actually changes day-to-day, and what you can safely ignore."
-pubDatetime: 2026-11-22
+pubDatetime: 2026-11-27
 tags: [swift, ios]
 ogImage: /images/swift-62-cover.png
-draft: true
+draft: false
 ---
 
 Swift 6.2 isn't a big-bang release. No concurrency overhaul, no new type system features that break everything you wrote last month. What it brings is a set of focused improvements that solve specific, annoying problems. Some you'll use immediately. Some are niche but important when you need them.
