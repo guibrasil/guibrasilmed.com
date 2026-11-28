@@ -1,10 +1,10 @@
 ---
 title: "SwiftData in production: the honest version"
 description: "SwiftData is good. It's also not finished. Here's what actually breaks, what you have to work around, and when to reach for Core Data anyway."
-pubDatetime: 2026-11-23
+pubDatetime: 2026-11-28
 tags: [swift, swiftdata, ios, coredata]
 ogImage: /images/swiftdata-cover.png
-draft: true
+draft: false
 ---
 
 I shipped SwiftData in a real app. Not a demo. Not a WWDC sample project. A production app that users open every day.
