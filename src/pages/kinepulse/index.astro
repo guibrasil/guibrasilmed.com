@@ -1,0 +1,161 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+---
+
+<Layout
+  title="Kinepulse — Step Tracker & Daily Goals"
+  description="Kinepulse tracks your daily steps, distance, and activity against a personal goal. Built for iPhone and Apple Watch."
+>
+  <Header />
+
+  <main id="main-content" class="kp-layout pb-16">
+    <div class="kp-inner">
+
+      <div class="kp-hero">
+        <h1>Kinepulse</h1>
+        <p class="kp-tagline">Step Tracker &amp; Daily Goals</p>
+        <p class="kp-platform">iPhone · Apple Watch · iOS 17+</p>
+      </div>
+
+      <section class="kp-section">
+        <p class="kp-body">
+          Kinepulse keeps you moving, every step of the way. Set a daily step goal, watch your ring close in real time, and get a moment of celebration when you hit it. Steps, distance, calories, heart rate, and active minutes — all read from Apple Health, nothing extra to set up.
+        </p>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Features</h2>
+        <ul class="kp-list">
+          <li><strong>Step ring</strong> — animated progress ring updates throughout the day.</li>
+          <li><strong>Weekly view</strong> — seven rings side by side to spot your best days at a glance.</li>
+          <li><strong>Streaks</strong> — every day you hit your goal keeps the streak alive.</li>
+          <li><strong>Monthly summary</strong> — scroll back through any month, tap for a day-by-day breakdown.</li>
+          <li><strong>Activity stats</strong> — distance, calories, heart rate, and active minutes in one place.</li>
+          <li><strong>Apple Watch</strong> — step ring on your wrist, updated continuously.</li>
+          <li><strong>Goal notifications</strong> — a nudge when you're behind, a celebration when you're done.</li>
+        </ul>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Support</h2>
+        <p class="kp-body">
+          Having an issue or have a question? Email <a href="mailto:guibrasildev@gmail.com">guibrasildev@gmail.com</a> and I'll get back to you as soon as possible.
+        </p>
+        <p class="kp-body">
+          <a href="/kinepulse/privacy" class="kp-link">Privacy Policy</a>
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .kp-layout {
+    padding-top: 2rem;
+  }
+
+  .kp-inner {
+    max-width: 64ch;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .kp-hero {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kp-hero h1 {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0 0 4px;
+  }
+
+  .kp-tagline {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 1.05rem;
+    color: var(--foreground);
+    margin: 0 0 6px;
+  }
+
+  .kp-platform {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  .kp-section {
+    margin-bottom: 2rem;
+  }
+
+  .kp-heading {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted-foreground);
+    margin: 0 0 12px;
+  }
+
+  .kp-body {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--foreground);
+    margin: 0 0 1em;
+  }
+
+  .kp-body a,
+  .kp-link {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .kp-body a:hover,
+  .kp-link:hover {
+    color: var(--foreground);
+  }
+
+  .kp-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .kp-list li {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--foreground);
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .kp-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.75rem;
+    top: 3px;
+  }
+
+  .kp-list strong {
+    font-weight: 700;
+    color: var(--foreground);
+  }
+</style>

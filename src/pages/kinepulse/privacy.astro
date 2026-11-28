@@ -1,0 +1,196 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+---
+
+<Layout
+  title="Kinepulse — Privacy Policy"
+  description="Privacy policy for Kinepulse, a step-tracking app for iPhone and Apple Watch."
+>
+  <Header />
+
+  <main id="main-content" class="kp-layout pb-16">
+    <div class="kp-inner">
+
+      <div class="kp-hero">
+        <h1>Privacy Policy</h1>
+        <p class="kp-platform">Kinepulse · Last updated: 28 November 2026</p>
+      </div>
+
+      <section class="kp-section">
+        <p class="kp-body">
+          Kinepulse is built by Guilherme Medeiros as a personal fitness app. This policy explains what data the app accesses, how it is used, and your rights.
+        </p>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Health data (Apple HealthKit)</h2>
+        <p class="kp-body">
+          Kinepulse reads the following data from Apple Health on your device: step count, walking distance, active energy burned, heart rate, and exercise minutes. This data is used solely to display your personal activity stats within the app.
+        </p>
+        <p class="kp-body">
+          Health data is never uploaded to any server, shared with third parties, used for advertising, or sold. It is processed on-device only and is never used for any purpose other than displaying your stats to you.
+        </p>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Account &amp; profile data</h2>
+        <p class="kp-body">
+          When you sign in with Google, Kinepulse stores your name, email address, and profile preferences (step goal, distance unit) in a secure database provided by <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase</a>. This data is used to sync your profile across devices and is not shared with any third party.
+        </p>
+        <p class="kp-body">
+          Authentication is handled through Google Sign-In. Kinepulse does not receive or store your Google password. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> for details on how Google processes your sign-in.
+        </p>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Notifications</h2>
+        <p class="kp-body">
+          If you enable notifications, Kinepulse sends local push notifications to remind you of your daily step goal and to celebrate when you reach it. Notification permission is optional and can be revoked at any time in iOS Settings. No notification data is transmitted off your device.
+        </p>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Data retention &amp; deletion</h2>
+        <p class="kp-body">
+          Your profile data is retained in Supabase for as long as your account exists. To delete your account and all associated data, email <a href="mailto:guibrasildev@gmail.com">guibrasildev@gmail.com</a> with the subject line "Delete my Kinepulse account" and your request will be processed within 30 days.
+        </p>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Third-party services</h2>
+        <ul class="kp-list">
+          <li><strong>Supabase</strong> — database and authentication infrastructure. <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+          <li><strong>Google Sign-In</strong> — identity provider. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+        </ul>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Children's privacy</h2>
+        <p class="kp-body">
+          Kinepulse is not directed at children under 13. If you believe a child has provided personal data through the app, contact <a href="mailto:guibrasildev@gmail.com">guibrasildev@gmail.com</a> and the data will be deleted promptly.
+        </p>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Changes to this policy</h2>
+        <p class="kp-body">
+          This policy may be updated from time to time. The "Last updated" date at the top of this page will reflect any changes. Continued use of the app after changes constitutes acceptance of the updated policy.
+        </p>
+      </section>
+
+      <section class="kp-section">
+        <h2 class="kp-heading">Contact</h2>
+        <p class="kp-body">
+          Questions about this policy? Email <a href="mailto:guibrasildev@gmail.com">guibrasildev@gmail.com</a>.
+        </p>
+        <p class="kp-body">
+          <a href="/kinepulse" class="kp-link">← Back to Kinepulse</a>
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .kp-layout {
+    padding-top: 2rem;
+  }
+
+  .kp-inner {
+    max-width: 64ch;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .kp-hero {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kp-hero h1 {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0 0 4px;
+  }
+
+  .kp-platform {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    margin: 0;
+  }
+
+  .kp-section {
+    margin-bottom: 2rem;
+  }
+
+  .kp-heading {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted-foreground);
+    margin: 0 0 12px;
+  }
+
+  .kp-body {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--foreground);
+    margin: 0 0 1em;
+  }
+
+  .kp-body a,
+  .kp-link {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .kp-body a:hover,
+  .kp-link:hover {
+    color: var(--foreground);
+  }
+
+  .kp-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .kp-list li {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--foreground);
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .kp-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 0.75rem;
+    top: 3px;
+  }
+
+  .kp-list strong {
+    font-weight: 700;
+    color: var(--foreground);
+  }
+</style>
